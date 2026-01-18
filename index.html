@@ -1567,5 +1567,65 @@
             heroTitle.style.opacity = '1';
         }, 300);
     </script>
+      <!-- ? ETH EFEITO DE CRYPTO CAINDO (MINIMALISTA) -->
+    <style>
+    .crypto-falling {
+        position: fixed;
+        top: -50px;
+        color: #f7931a;
+        font-size: 1.5em;
+        user-select: none;
+        pointer-events: none;
+        text-shadow: 0 0 8px currentColor;
+        z-index: 9999;
+        animation: cryptoFall linear forwards;
+    }
+
+    .crypto-falling.eth {
+        color: #627eea;
+    }
+
+    @keyframes cryptoFall {
+        to {
+            transform: translateY(110vh) rotate(360deg);
+            opacity: 0;
+        }
+    }
+    </style>
+
+    <script>
+    // Adicionar Font Awesome se n�o estiver presente
+    if (!document.querySelector('link[href*="font-awesome"]')) {
+        const faLink = document.createElement('link');
+        faLink.rel = 'stylesheet';
+        faLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
+        document.head.appendChild(faLink);
+    }
+
+    function createCrypto() {
+        const icon = document.createElement("div");
+        const isBitcoin = Math.random() > 0.5;
+        
+        icon.className = `crypto-falling ${isBitcoin ? '' : 'eth'}`;
+        icon.innerHTML = isBitcoin ? '<i class="fab fa-bitcoin"></i>' : '<i class="fab fa-ethereum"></i>';
+        
+        icon.style.left = Math.random() * window.innerWidth + "px";
+        icon.style.fontSize = (Math.random() * 25 + 15) + "px";
+        icon.style.opacity = Math.random() * 0.6 + 0.4;
+        icon.style.animationDuration = Math.random() * 10 + 8 + "s";
+        
+        document.body.appendChild(icon);
+        
+        setTimeout(() => icon.remove(), 18000);
+    }
+
+    // Inicializar
+    for (let i = 0; i < 30; i++) {
+        setTimeout(createCrypto, i * 400);
+    }
+
+    setInterval(createCrypto, 800);
+    </script>
+    <!-- ? ETH FIM EFEITO DE CRYPTO CAINDO -->
 </body>
 </html>
