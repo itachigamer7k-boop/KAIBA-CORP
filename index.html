@@ -1,0 +1,1571 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KAIBA CORP - Estudo de Criptomoedas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #0a0e17;
+            color: #e0e0e0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Cabe�alho e Navega��o */
+        header {
+            background: linear-gradient(90deg, #0a0e17 0%, #121a2e 100%);
+            border-bottom: 1px solid #1a3a5f;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        /* Logo KAIBA CORP */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-circle {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #00a8ff 0%, #0066cc 100%);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid #0097e6;
+            box-shadow: 0 0 15px rgba(0, 168, 255, 0.5);
+        }
+        
+        .logo-circle span {
+            font-size: 24px;
+            font-weight: 800;
+            color: white;
+            letter-spacing: 1px;
+        }
+        
+        .logo-text {
+            font-size: 32px;
+            font-weight: 700;
+            color: #00a8ff;
+            text-shadow: 0 0 10px rgba(0, 168, 255, 0.7);
+            letter-spacing: 1px;
+        }
+        
+        .logo-text .corp {
+            position: relative;
+            color: #f5f5f5;
+        }
+        
+        .registered {
+            position: absolute;
+            top: -8px;
+            right: -12px;
+            font-size: 10px;
+            color: #f5f5f5;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            color: #b8e1ff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: color 0.3s, text-shadow 0.3s;
+            padding: 8px 5px;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: #00a8ff;
+            text-shadow: 0 0 8px rgba(0, 168, 255, 0.7);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #00a8ff;
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: transparent;
+            border: none;
+            color: #00a8ff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 100px 0;
+            background: radial-gradient(ellipse at center, #121a2e 0%, #0a0e17 70%);
+            text-align: center;
+            border-bottom: 1px solid #1a3a5f;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(0, 168, 255, 0.8);
+        }
+        
+        .hero h1 span {
+            color: #00a8ff;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: #b8e1ff;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(90deg, #0066cc 0%, #00a8ff 100%);
+            color: white;
+            padding: 16px 40px;
+            font-size: 18px;
+            font-weight: 700;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 102, 204, 0.4);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 102, 204, 0.6);
+            background: linear-gradient(90deg, #0052a3 0%, #0097e6 100%);
+        }
+        
+        /* Conte�do Principal */
+        .main-content {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 60px;
+            color: #ffffff;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: #00a8ff;
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        
+        /* Cards de Criptomoedas */
+        .crypto-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+        
+        .crypto-card {
+            background: linear-gradient(145deg, #121a2e 0%, #0d1424 100%);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border: 1px solid #1a3a5f;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .crypto-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #0066cc 0%, #00a8ff 100%);
+        }
+        
+        .crypto-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+        }
+        
+        .crypto-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+            color: #00a8ff;
+        }
+        
+        .crypto-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+        
+        .crypto-card p {
+            color: #b8e1ff;
+            margin-bottom: 20px;
+        }
+        
+        .crypto-link {
+            color: #00a8ff;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: gap 0.3s;
+        }
+        
+        .crypto-link:hover {
+            gap: 12px;
+        }
+        
+        /* Tabela de Pre�os */
+        .price-table-container {
+            overflow-x: auto;
+            margin-bottom: 80px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #121a2e;
+        }
+        
+        .price-table th {
+            background: linear-gradient(90deg, #0066cc 0%, #00a8ff 100%);
+            color: white;
+            padding: 20px;
+            text-align: left;
+            font-weight: 700;
+        }
+        
+        .price-table td {
+            padding: 20px;
+            border-bottom: 1px solid #1a3a5f;
+            color: #e0e0e0;
+        }
+        
+        .price-table tr:hover {
+            background-color: #0d1424;
+        }
+        
+        .positive {
+            color: #2ecc71;
+        }
+        
+        .negative {
+            color: #e74c3c;
+        }
+
+        /* Simulator */
+        .simulator {
+            background: #121a2e;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            border-left: 10px solid #00a8ff;
+            transition: all 0.3s;
+        }
+
+        .simulator-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 2rem;
+            color: #00a8ff;
+        }
+
+        .simulator-title i {
+            font-size: 2rem;
+            color: #00a8ff;
+        }
+
+        .simulator-controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .input-group label {
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            color: var(--dark-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .input-group input, .input-group select {
+            padding: 12px 18px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+
+        .input-group input:focus, .input-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(26, 95, 180, 0.1);
+        }
+
+        .simulator-results {
+            background: linear-gradient(135deg, #f9f9f9 0%, #f0f5ff 100%);
+            padding: 2rem;
+            border-radius: 10px;
+            border-left: 10px solid #008000;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.2rem;
+            padding-bottom: 1.2rem;
+            border-bottom: 1px dashed #ddd;
+        }
+
+        .result-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .result-value {
+            font-weight: 800;
+            color:#008000;
+            font-size: 1.1rem;
+        }
+
+        
+        /* Recursos de Estudo */
+        .study-resources {
+            margin-bottom: 80px;
+        }
+        
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .resource-item {
+            background: #121a2e;
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            border: 1px solid #1a3a5f;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .resource-item:hover {
+            border-color: #00a8ff;
+            box-shadow: 0 0 20px rgba(0, 168, 255, 0.3);
+            transform: translateY(-5px);
+        }
+        
+        .resource-icon {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #00a8ff;
+        }
+        
+        .resource-item h4 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        /* Gloss�rio */
+        .glossary-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-bottom: 80px;
+        }
+
+        .glossary-term {
+            background: linear-gradient(145deg, #121a2e 0%, #0d1424 100%);
+            border-radius: 10px;
+            padding: 25px;
+            border-left: 4px solid #00a8ff;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .glossary-term:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 168, 255, 0.2);
+        }
+
+        .glossary-term h4 {
+            color: #00a8ff;
+            font-size: 18px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .glossary-term p {
+            color: #b8e1ff;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+
+        #glossario .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 40px;
+            color: #ffffff;
+            position: relative;
+        }
+
+        #glossario .section-title h2 {
+            margin-bottom: 10px;
+        }
+
+        #glossario .section-title p {
+            color: #b8e1ff;
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        #glossario .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background: #00a8ff;
+            margin: 20px auto;
+            border-radius: 2px;
+        }
+        
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal {
+            background: linear-gradient(145deg, #121a2e 0%, #0d1424 100%);
+            width: 90%;
+            max-width: 700px;
+            max-height: 85vh;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid #1a3a5f;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            transform: translateY(30px);
+            transition: transform 0.4s;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+        
+        .modal-header {
+            background: linear-gradient(90deg, #0066cc 0%, #00a8ff 100%);
+            padding: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h3 {
+            color: white;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .modal-header i {
+            font-size: 28px;
+        }
+        
+        .close-modal {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .close-modal:hover {
+            transform: rotate(90deg);
+        }
+        
+        .modal-content {
+            padding: 30px;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+        
+        .modal-content h4 {
+            color: #00a8ff;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+        
+        .modal-content p {
+            margin-bottom: 20px;
+            color: #b8e1ff;
+            line-height: 1.7;
+        }
+        
+        .modal-content ul {
+            margin-left: 20px;
+            margin-bottom: 25px;
+            color: #b8e1ff;
+        }
+        
+        .modal-content li {
+            margin-bottom: 10px;
+        }
+        
+        .modal-actions {
+            padding: 0 30px 30px;
+            display: flex;
+            gap: 15px;
+        }
+        
+        .modal-btn {
+            padding: 12px 24px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+        
+        .modal-btn.primary {
+            background: linear-gradient(90deg, #0066cc 0%, #00a8ff 100%);
+            color: white;
+        }
+        
+        .modal-btn.secondary {
+            background: transparent;
+            color: #00a8ff;
+            border: 1px solid #1a3a5f;
+        }
+        
+        .modal-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .external-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .external-link i {
+            font-size: 14px;
+        }
+        
+        /* Footer */
+        footer {
+            background: #0d1424;
+            padding: 60px 0 30px;
+            border-top: 1px solid #1a3a5f;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h4 {
+            font-size: 20px;
+            margin-bottom: 25px;
+            color: #ffffff;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: #00a8ff;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-column ul li a {
+            color: #b8e1ff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: #00a8ff;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: #1a3a5f;
+            color: #00a8ff;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: #00a8ff;
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #1a3a5f;
+            color: #b8e1ff;
+            font-size: 14px;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 40px;
+            }
+            
+            nav ul {
+                gap: 20px;
+            }
+            
+            .modal {
+                max-width: 90%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+                position: absolute;
+                top: 25px;
+                right: 20px;
+            }
+            
+            .mobile-nav {
+                display: none;
+                width: 100%;
+                margin-top: 20px;
+            }
+            
+            .mobile-nav.active {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .section-title {
+                font-size: 28px;
+            }
+            
+            .modal-header h3 {
+                font-size: 20px;
+            }
+            
+            .modal-content {
+                padding: 20px;
+            }
+            
+            .modal-actions {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero {
+                padding: 70px 0;
+            }
+            
+            .crypto-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-column {
+                min-width: 100%;
+            }
+            
+            .modal-header {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabe�alho com logo -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-container">
+                    <div class="logo-circle">
+                        <span>KC</span>
+                    </div>
+                    <div class="logo-text">
+                        KAIBA <span class="corp">CORP<span class="registered">�</span></span>
+                    </div>
+                </div>
+                
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <nav class="mobile-nav" id="mobileNav">
+                    <ul>
+                        <li><a href="#home">In�cio</a></li>
+                        <li><a href="#cryptos">Criptomoedas</a></li>
+                        <li><a href="#prices">Pre�os</a></li>
+                        <li><a href="#resources">Recursos</a></li>
+                        <li><a href="#about">Sobre</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Se��o Hero -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1><span>CRYPTOMOEDAS</span></h1>
+            <p>Explore o mundo das criptomoedas com materiais educacionais, an�lise de mercado e ferramentas para traders iniciantes e experientes.</p>
+            <a href="#cryptos" class="cta-button">Come�ar a Estudar</a>
+        </div>
+    </section>
+
+    <!-- Conte�do Principal -->
+    <main class="main-content container">
+        <!-- Se��o de Criptomoedas -->
+        <section id="cryptos">
+            <h2 class="section-title">Principais Criptomoedas</h2>
+            <div class="crypto-cards">
+                <div class="crypto-card">
+                    <div class="crypto-icon">
+                        <i class="fab fa-bitcoin"></i>
+                    </div>
+                    <h3>Bitcoin (BTC)</h3>
+                    <p>A primeira e mais conhecida criptomoeda, criada em 2009 por Satoshi Nakamoto. Bitcoin � uma moeda digital descentralizada.</p>
+                    <a href="https://bitcoin.org" target="_blank" class="crypto-link">Saiba mais <i class="fas fa-external-link-alt"></i></a>
+                </div>
+                
+                <div class="crypto-card">
+                    <div class="crypto-icon">
+                        <i class="fab fa-ethereum"></i>
+                    </div>
+                    <h3>Ethereum (ETH)</h3>
+                    <p>Plataforma blockchain que permite a cria��o de contratos inteligentes e aplica��es descentralizadas (dApps).</p>
+                    <a href="https://ethereum.org" target="_blank" class="crypto-link">Saiba mais <i class="fas fa-external-link-alt"></i></a>
+                </div>
+                
+                <div class="crypto-card">
+                    <div class="crypto-icon">
+                        <i class="fas fa-coins"></i>
+                    </div>
+                    <h3>Tether (USDT)</h3>
+                    <p>Tether � uma stablecoin, criptoativo que tem como objetivo manter seu valor atrelado a um ativo do mundo tradicional: no caso da Tether, o d�lar americano.</p>
+                    <a href="https://tether.to" target="_blank" class="crypto-link">Saiba mais <i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tabela de Pre�os -->
+        <section id="prices">
+            <h2 class="section-title">Cota��es em Tempo Real</h2>
+            <div class="price-table-container">
+                <table class="price-table">
+                    <thead>
+                        <tr>
+                            <th>Criptomoeda</th>
+                            <th>Pre�o (USD)</th>
+                            <th>Varia��o (24h)</th>
+                            <th>Capitaliza��o de Mercado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><i class="fab fa-bitcoin"></i> Bitcoin (BTC)</td>
+                            <td>$61,423.50</td>
+                            <td class="positive">+2.34%</td>
+                            <td>$1.21 trilh�o</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fab fa-ethereum"></i> Ethereum (ETH)</td>
+                            <td>$3,412.78</td>
+                            <td class="positive">+1.56%</td>
+                            <td>$408.5 bilh�es</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-coins"></i> Tether (USDT)</td>
+                            <td>$1.00</td>
+                            <td class="negative">-0.87%</td>
+                            <td>$16.1 bilh�es</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-rocket"></i> Solana (SOL)</td>
+                            <td>$142.36</td>
+                            <td class="positive">+5.23%</td>
+                            <td>$62.3 bilh�es</td>
+                        </tr>
+                        <tr>
+                            <td><i class="fas fa-b"></i> Binance Coin (BNB)</td>
+                            <td>$585.90</td>
+                            <td class="positive">+0.92%</td>
+                            <td>$89.7 bilh�es</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Simulador de Investimentos -->
+        <section id="simulador">
+            <div class="container">
+                <div class="section-title">
+                    <h3>Simulador de Trading</h3>
+                    <p>Teste suas estratégias de investimento sem riscos reais. Ideal para iniciantes.</p>
+                </div>
+            
+                <div class="simulator">
+                    <div class="simulator-title">
+                        <i class="fas fa-vial"></i>
+                        <h3>Laboratório de Trading</h3>
+                    </div>
+                
+                    <div class="simulator-controls">
+                        <div class="input-group">
+                            <label for="crypto-select"><i class="fas fa-coins"></i> Criptomoeda:</label>
+                            <select id="crypto-select">
+                                <option value="btc">Bitcoin (BTC)</option>
+                                <option value="eth">Ethereum (ETH)</option>
+                                <option value="ada">Cardano (ADA)</option>
+                                <option value="sol">Solana (SOL)</option>
+                                <option value="dot">Polkadot (DOT)</option>
+                            </select>
+                        </div>
+                    
+                        <div class="input-group">
+                            <label for="investment"><i class="fas fa-money-bill-wave"></i> Capital Inicial (R$):</label>
+                            <input type="number" id="investment" min="100" max="1000000" value="5000">
+                        </div>
+                    
+                        <div class="input-group">
+                            <label for="period"><i class="fas fa-calendar-alt"></i> Período (meses):</label>
+                            <input type="number" id="period" min="1" max="60" value="6">
+                        </div>
+                    
+                        <div class="input-group">
+                            <label for="monthly-add"><i class="fas fa-plus-circle"></i> Aporte Mensal (R$):</label>
+                            <input type="number" id="monthly-add" min="0" max="10000" value="500">
+                        </div>
+                    </div>
+                
+                    <div style="text-align: center; margin: 2rem 0;">
+                        <button class="cta-button" id="simulate-btn"><i class="fas fa-play-circle"></i> Executar Simulação</button>
+                    </div>
+                
+                    <div class="simulator-results" id="results" style="display: none;">
+                        <h3>Resultados da Simulação</h3>
+                        <div class="result-item">
+                            <span>Capital Total Investido:</span>
+                            <span class="result-value" id="total-invested">R$ 0,00</span>
+                        </div>
+                        <div class="result-item">
+                            <span>Valor Final do Portfólio:</span>
+                            <span class="result-value" id="final-value">R$ 0,00</span>
+                        </div>
+                        <div class="result-item">
+                             <span>Lucro/Prejuízo:</span>
+                            <span class="result-value" id="profit-loss">R$ 0,00</span>
+                        </div>
+                        <div class="result-item">
+                            <span>Retorno Percentual:</span>
+                            <span class="result-value" id="return-percent">0%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recursos de Estudo -->
+        <section id="resources">
+            <h2 class="section-title">Recursos de Estudo</h2>
+            <div class="study-resources">
+                <div class="resources-grid">
+                    <!-- Card 1 - Guias para Iniciantes -->
+                    <div class="resource-item" data-modal="modal-guia">
+                        <div class="resource-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <h4>Guias para Iniciantes</h4>
+                        <p>Aprenda os conceitos b�sicos de blockchain e criptomoedas.</p>
+                    </div>
+                    
+                    <!-- Card 2 - An�lise T�cnica -->
+                    <div class="resource-item" data-modal="modal-analise">
+                        <div class="resource-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h4>An�lise T�cnica</h4>
+                        <p>Domine as t�cnicas de an�lise gr�fica para trading.</p>
+                    </div>
+                    
+                    <!-- Card 3 - Seguran�a -->
+                    <div class="resource-item" data-modal="modal-seguranca">
+                        <div class="resource-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4>Seguran�a</h4>
+                        <p>Proteja suas criptomoedas com as melhores pr�ticas.</p>
+                    </div>
+                    
+                    <!-- Card 4 - Not�cias do Mercado -->
+                    <div class="resource-item" data-modal="modal-noticias">
+                        <div class="resource-icon">
+                            <i class="fas fa-newspaper"></i>
+                        </div>
+                        <h4>Not�cias do Mercado</h4>
+                        <p>Fique atualizado com as �ltimas not�cias do mundo cripto.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Gloss�rio -->
+    <section id="glossario">
+        <div class="container">
+            <div class="section-title">
+                <h2>Gloss�rio do Traders</h2>
+                <p>Conhe�a os principais termos utilizados no ecossistema cripto</p>
+            </div>
+        
+            <div class="glossary-container">
+                <div class="glossary-term">
+                    <h4>Altcoin</h4>
+                    <p>Qualquer criptomoeda alternativa ao Bitcoin. Exemplos: Ethereum, Cardano, Solana.</p>
+                </div>
+            
+                <div class="glossary-term">
+                    <h4>DeFi (Finan�as Descentralizadas)</h4>
+                    <p>Sistema financeiro baseado em blockchain que n�o depende de intermedi�rios como bancos.</p>
+                </div>
+            
+                <div class="glossary-term">
+                    <h4>Exchange</h4>
+                    <p>Plataforma online onde se pode comprar, vender e negociar criptomoedas.</p>
+                </div>
+            
+                <div class="glossary-term">
+                    <h4>FOMO (Fear Of Missing Out)</h4>
+                    <p>Medo de perder uma oportunidade de investimento, que pode levar a decis�es precipitadas.</p>
+                </div>
+            
+                <div class="glossary-term">
+                    <h4>HODL</h4>
+                    <p>Termo derivado de um erro de digita��o de "hold" (manter), significa segurar criptomoedas por longo prazo.</p>
+                </div>
+
+                <div class="glossary-term">
+                    <h4>Bull Market</h4>
+                    <p>Mercado em alta, otimista, com tend�ncia de valorização dos preços. Período ideal para compras e investimentos de longo prazo.</p>
+                </div>
+
+                <div class="glossary-term">
+                    <h4>Bear Market</h4>
+                    <p>Mercado em baixa, pessimista, com tend�ncia de queda dos preços. Período para cautela ou venda a descoberto para traders experientes.</p>
+                </div>
+            
+                <div class="glossary-term">
+                    <h4>Smart Contract</h4>
+                    <p>Contrato autoexecut�vel com termos escritos em c�digo, comum na blockchain Ethereum.</p>
+                </div>
+
+                <div class="glossary-term">
+                    <h4>Bot Trading</h4>
+                    <p>Uso de algoritmos automatizados para executar opera��es de compra e venda baseadas em critérios predefinidos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="about">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h4>KAIBA CORP</h4>
+                    <p>Empresa l�der em educa��o sobre criptomoedas e blockchain. Nosso objetivo � democratizar o conhecimento sobre ativos digitais.</p>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Junte-se á Comunidade</h4>
+                    <p>Conecte-se com outros trades, compartilhe ideias e aprenda com os melhores.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Links R�pidos</h4>
+                    <ul>
+                        <li><a href="#home">In�cio</a></li>
+                        <li><a href="#cryptos">Criptomoedas</a></li>
+                        <li><a href="#prices">Cota��es</a></li>
+                        <li><a href="#resources">Recursos</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4>Contato</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> contato@kaibacorp.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> New York, EUA</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2026 <strong>KAIBA CORP<sup>�</sup></strong>. Todos os direitos reservados.</p>
+                <p><em>AVISO: Trading envolve riscos significativos. O conteúdo é educacional e não costitui recomendação de investimento.</em></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modais para os Recursos de Estudo -->
+    
+    <!-- Modal 1: Guias para Iniciantes -->
+    <div class="modal-overlay" id="modal-guia">
+        <div class="modal">
+            <div class="modal-header">
+                <h3><i class="fas fa-book-open"></i> Guias para Iniciantes</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-content">
+                <h4>Comece sua jornada no mundo das criptomoedas</h4>
+                <p>Este guia completo foi desenvolvido para quem est� come�ando agora no mercado de criptomoedas. Aqui voc� encontrar� tudo o que precisa para dar os primeiros passos com seguran�a e confian�a.</p>
+                
+                <h4>Conte�do do Guia:</h4>
+                <ul>
+                    <li><strong>O que � Blockchain:</strong> Entenda a tecnologia por tr�s das criptomoedas</li>
+                    <li><strong>Como funcionam as Criptomoedas:</strong> Conceitos b�sicos de minera��o, transa��es e carteiras</li>
+                    <li><strong>Primeiros Passos:</strong> Como criar sua primeira carteira digital</li>
+                    <li><strong>Compra e Venda:</strong> Guia para suas primeiras opera��es</li>
+                    <li><strong>Terminologia B�sica:</strong> Gloss�rio com os termos mais importantes</li>
+                    <li><strong>Riscos e Oportunidades:</strong> O que considerar antes de investir</li>
+                </ul>
+                
+                <p>Nosso material � atualizado mensalmente para refletir as mudan�as neste mercado din�mico. Recomendamos dedicar pelo menos 8 horas de estudo para absorver todo o conte�do b�sico.</p>
+            </div>
+            <div class="modal-actions">
+                <a href="https://www.coindesk.com/learn/" target="_blank" class="modal-btn primary external-link">
+                    Acessar Guia no CoinDesk Learn <i class="fas fa-external-link-alt"></i>
+                </a>
+                <button class="modal-btn secondary" id="downloadGuia">Baixar Guia Resumido (PDF)</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2: An�lise T�cnica -->
+    <div class="modal-overlay" id="modal-analise">
+        <div class="modal">
+            <div class="modal-header">
+                <h3><i class="fas fa-chart-line"></i> An�lise T�cnica para Trading</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-content">
+                <h4>Domine as t�cnicas de an�lise gr�fica</h4>
+                <p>A an�lise t�cnica � uma ferramenta essencial para qualquer trader de criptomoedas. Este curso ensina como interpretar gr�ficos, identificar tend�ncias e tomar decis�es mais informadas.</p>
+                
+                <h4>M�dulos do Curso:</h4>
+                <ul>
+                    <li><strong>Introdu��o aos Gr�ficos:</strong> Tipos de gr�ficos e timeframes</li>
+                    <li><strong>Suporte e Resist�ncia:</strong> Identifica��o de n�veis importantes</li>
+                    <li><strong>Indicadores T�cnicos:</strong> MACD, RSI, M�dias M�veis e Bollinger Bands</li>
+                    <li><strong>Padr�es de Candlestick:</strong> Reconhecimento de padr�es de revers�o e continua��o</li>
+                    <li><strong>Estrat�gias de Entrada e Sa�da:</strong> Definindo pontos �timos para opera��es</li>
+                    <li><strong>Gest�o de Risco:</strong> Como proteger seu capital em opera��es de trading</li>
+                </ul>
+                
+                <p>O curso inclui exerc�cios pr�ticos com gr�ficos reais do mercado de criptomoedas e acesso a nossa plataforma de simula��o para praticar sem riscos.</p>
+            </div>
+            <div class="modal-actions">
+                <a href="https://www.binance.com/en/square/post/category/technical-analysis" target="_blank" class="modal-btn primary external-link">
+                    Aprender An�lise T�cnica na Binance <i class="fas fa-external-link-alt"></i>
+                </a>
+                <button class="modal-btn secondary" id="simuladorTrading">Acessar Simulador de Trading</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 3: Seguran�a -->
+    <div class="modal-overlay" id="modal-seguranca">
+        <div class="modal">
+            <div class="modal-header">
+                <h3><i class="fas fa-shield-alt"></i> Seguran�a em Criptomoedas</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-content">
+                <h4>Proteja seus ativos digitais</h4>
+                <p>A seguran�a � fundamental no mundo das criptomoedas. Este guia detalhado apresenta as melhores pr�ticas para proteger seus ativos contra hackers, golpes e erros comuns.</p>
+                
+                <h4>T�picos Abordados:</h4>
+                <ul>
+                    <li><strong>Tipos de Carteiras:</strong> Hot wallets vs. cold wallets, custodial vs. non-custodial</li>
+                    <li><strong>Hardware Wallets:</strong> Como usar e configurar corretamente</li>
+                    <li><strong>Seed Phrases:</strong> A import�ncia e formas seguras de armazenamento</li>
+                    <li><strong>Autentica��o de Dois Fatores (2FA):</strong> Configura��o e boas pr�ticas</li>
+                    <li><strong>Golpes Comuns:</strong> Phishing, scam coins, fake exchanges - como identificar e evitar</li>
+                    <li><strong>Backup e Recupera��o:</strong> Procedimentos para garantir acesso aos seus ativos</li>
+                    <li><strong>Seguran�a em Exchanges:</strong> Como escolher e usar exchanges com seguran�a</li>
+                </ul>
+                
+                <p>Inclu�mos um checklist de seguran�a que voc� pode seguir para auditar suas pr�prias pr�ticas de seguran�a periodicamente.</p>
+            </div>
+            <div class="modal-actions">
+                <a href="https://www.coinbase.com/learn/crypto-basics/how-to-secure-crypto" target="_blank" class="modal-btn primary external-link">
+                    Guia de Seguran�a da Coinbase <i class="fas fa-external-link-alt"></i>
+                </a>
+                <button class="modal-btn secondary" id="checklistSeguranca">Baixar Checklist de Seguran�a</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 4: Not�cias do Mercado -->
+    <div class="modal-overlay" id="modal-noticias">
+        <div class="modal">
+            <div class="modal-header">
+                <h3><i class="fas fa-newspaper"></i> Not�cias do Mercado Cripto</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-content">
+                <h4>Fique atualizado com o mercado</h4>
+                <p>O mercado de criptomoedas � extremamente din�mico. Nossa plataforma de not�cias agrega informa��es de fontes confi�veis e as apresenta de forma organizada e anal�tica.</p>
+                
+                <h4>Recursos Dispon�veis:</h4>
+                <ul>
+                    <li><strong>Feed de Not�cias em Tempo Real:</strong> Atualiza��es 24/7 do mercado global</li>
+                    <li><strong>An�lise de Impacto:</strong> Como cada not�cia afeta diferentes criptomoedas</li>
+                    <li><strong>Calend�rio de Eventos:</strong> Atualiza��es de redes, hard forks, lan�amentos importantes</li>
+                    <li><strong>Regulamenta��o:</strong> Not�cias sobre legisla��o em diferentes pa�ses</li>
+                    <li><strong>Ado��o Institucional:</strong> Empresas e fundos entrando no mercado</li>
+                    <li><strong>An�lise de Sentimento:</strong> Medi��o do sentimento do mercado atrav�s de m�ltiplas fontes</li>
+                </ul>
+                
+                <h4>�ltimas Not�cias:</h4>
+                <p><strong>� Bitcoin atinge maior n�vel em 3 meses:</strong> Otimismo com poss�vel aprova��o de ETFs nos EUA</p>
+                <p><strong>� Ethereum completa atualiza��o Dencun:</strong> Redu��o significativa nas taxas para L2s</p>
+                <p><strong>� Novo projeto DeFi atinge $1B em TVL:</strong> Protocolo de lending inovador ganha tra��o</p>
+                
+                <p>Nossos analistas fornecem contexto e insights para ajudar voc� a entender o real impacto de cada not�cia no mercado.</p>
+            </div>
+            <div class="modal-actions">
+                <a href="https://www.coindesk.com" target="_blank" class="modal-btn primary external-link">
+                    Acessar Portal CoinDesk <i class="fas fa-external-link-alt"></i>
+                </a>
+                <button class="modal-btn secondary" id="alertasNoticias">Configurar Alertas Personalizados</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Menu mobile
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            const mobileNav = document.getElementById('mobileNav');
+            mobileNav.classList.toggle('active');
+            
+            // Alternar �cone do bot�o
+            const icon = this.querySelector('i');
+            if (icon.classList.contains('fa-bars')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        
+        // Fechar menu ao clicar em um link
+        document.querySelectorAll('#mobileNav a').forEach(link => {
+            link.addEventListener('click', function() {
+                document.getElementById('mobileNav').classList.remove('active');
+                document.getElementById('mobileMenuBtn').querySelector('i').classList.remove('fa-times');
+                document.getElementById('mobileMenuBtn').querySelector('i').classList.add('fa-bars');
+            });
+        });
+        
+        // Simular atualiza��o de pre�os
+        function updatePrices() {
+            const prices = document.querySelectorAll('.price-table td:nth-child(2)');
+            const changes = document.querySelectorAll('.price-table td:nth-child(3)');
+            
+            // Pequenas varia��es aleat�rias nos pre�os para simular mercado real
+            prices.forEach(priceCell => {
+                const currentPrice = parseFloat(priceCell.textContent.replace('$', '').replace(',', ''));
+                const randomChange = (Math.random() - 0.5) * 0.02; // +/- 1%
+                const newPrice = currentPrice * (1 + randomChange);
+                priceCell.textContent = '$' + newPrice.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+            });
+            
+            // Atualizar varia��es
+            changes.forEach(changeCell => {
+                const randomChange = (Math.random() - 0.5) * 3; // +/- 1.5%
+                const isPositive = randomChange >= 0;
+                changeCell.textContent = (isPositive ? '+' : '') + randomChange.toFixed(2) + '%';
+                changeCell.className = isPositive ? 'positive' : 'negative';
+            });
+        }
+        
+        // Atualizar pre�os a cada 10 segundos
+        setInterval(updatePrices, 10000);
+        
+        // L�gica para abrir os modais
+        document.querySelectorAll('.resource-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const modalId = this.getAttribute('data-modal');
+                const modal = document.getElementById(modalId);
+                if (modal) {
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden'; // Impede scroll do body quando modal est� aberto
+                }
+            });
+        });
+        
+        // L�gica para fechar os modais
+        document.querySelectorAll('.close-modal, .modal-overlay').forEach(element => {
+            element.addEventListener('click', function(e) {
+                // Fecha todos os modais
+                document.querySelectorAll('.modal-overlay').forEach(modal => {
+                    modal.classList.remove('active');
+                });
+                document.body.style.overflow = 'auto'; // Restaura scroll do body
+                
+                // Impede que o clique no modal feche (s� fecha se clicar no overlay ou no bot�o X)
+                if (e.target.classList.contains('modal')) {
+                    e.stopPropagation();
+                }
+            });
+        });
+        
+        // Impede que o clique dentro do modal feche o modal
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        });
+        
+        // Fecha modal com tecla ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal-overlay').forEach(modal => {
+                    modal.classList.remove('active');
+                });
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Bot�es de a��o dentro dos modais
+        document.querySelectorAll('.modal-btn:not(.external-link)').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const modal = this.closest('.modal-overlay');
+                const modalTitle = modal.querySelector('.modal-header h3').textContent;
+                const btnText = this.textContent;
+                
+                // Fecha o modal ap�s clicar em um bot�o de a��o (exceto links externos)
+                if (!this.classList.contains('external-link')) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+                
+                // Feedback para o usu�rio
+                if (btnText.includes('Baixar')) {
+                    alert(`Download iniciado para: ${modalTitle}\n\nEm uma implementa��o real, o arquivo come�aria a ser baixado.`);
+                } else if (btnText.includes('Acessar') || btnText.includes('Simulador')) {
+                    alert(`Abrindo recurso: ${btnText}\n\nEm uma implementa��o real, voc� seria redirecionado para a ferramenta.`);
+                } else if (btnText.includes('Configurar')) {
+                    alert(`Configura��o para: ${btnText}\n\nEm uma implementa��o real, voc� seria redirecionado para a p�gina de configura��es.`);
+                }
+            });
+        });
+        
+        // Links externos - adicionar confirma��o
+        document.querySelectorAll('.external-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                const linkHref = this.getAttribute('href');
+                const linkText = this.textContent;
+                
+                // Confirma��o antes de abrir link externo
+                const userConfirmed = confirm(`Voc� est� saindo do site KAIBA CORP e ser� redirecionado para:\n\n${linkHref}\n\nDeseja continuar?`);
+                
+                if (!userConfirmed) {
+                    e.preventDefault();
+                } else {
+                    // Fecha o modal antes de redirecionar
+                    const modal = this.closest('.modal-overlay');
+                    if (modal) {
+                        modal.classList.remove('active');
+                        document.body.style.overflow = 'auto';
+                    }
+                    
+                    // Registra o clique (em uma implementa��o real, poderia ser enviado para analytics)
+                    console.log(`Usu�rio clicou em: ${linkText} -> ${linkHref}`);
+                }
+            });
+        });
+        
+        // Adicionar �cones de link externo para todos os links que abrem em nova aba
+        document.querySelectorAll('a[target="_blank"]').forEach(link => {
+            if (!link.querySelector('.fa-external-link-alt')) {
+                const icon = document.createElement('i');
+                icon.className = 'fas fa-external-link-alt';
+                icon.style.marginLeft = '5px';
+                icon.style.fontSize = '0.8em';
+                link.appendChild(icon);
+            }
+        });
+    </script>
+
+    <script>
+        // Simulador de Trading
+        document.getElementById('simulate-btn').addEventListener('click', function() {
+            // Valores das criptomoedas (fictícios para simulação)
+            const cryptoPrices = {
+                btc: 150000, // R$ 150.000 por Bitcoin
+                eth: 9000, // R$ 9.000 por Ethereum
+                ada: 2.5, // R$ 2,50 por Cardano
+                sol: 120, // R$ 120 por Solana
+                dot: 35 // R$ 35 por Polkadot
+            };
+            
+            // Volatilidade média (fictícia)
+            const cryptoVolatility = {
+                btc: 0.02, // 2% ao mês
+                eth: 0.04, // 4% ao mês
+                ada: 0.06, // 6% ao mês
+                sol: 0.08, // 8% ao mês
+                dot: 0.05 // 5% ao mês
+            };
+            
+            // Retorno médio esperado (fictício)
+            const cryptoReturns = {
+                btc: 0.03, // 3% ao mês
+                eth: 0.05, // 5% ao mês
+                ada: 0.04, // 4% ao mês
+                sol: 0.07, // 7% ao mês
+                dot: 0.045 // 4.5% ao mês
+            };
+            
+            // Obter valores do formulário
+            const crypto = document.getElementById('crypto-select').value;
+            const initialInvestment = parseFloat(document.getElementById('investment').value);
+            const period = parseInt(document.getElementById('period').value);
+            const monthlyAdd = parseFloat(document.getElementById('monthly-add').value);
+            
+            // Calcular valores com simulação estocástica
+            let futureValue = initialInvestment;
+            let monthlyValue = initialInvestment;
+            
+            // Simular com variação aleatória
+            for (let i = 0; i < period; i++) {
+                // Retorno aleatório baseado na volatilidade
+                const randomFactor = 1 + (Math.random() - 0.5) * 2 * cryptoVolatility[crypto];
+                const monthlyReturn = cryptoReturns[crypto] * randomFactor;
+                
+                // Aplicar retorno mensal
+                monthlyValue = monthlyValue * (1 + monthlyReturn) + monthlyAdd;
+                
+                // Atualizar valor futuro
+                futureValue = monthlyValue;
+            }
+            
+            // Calcular total investido
+            const totalInvested = initialInvestment + (monthlyAdd * period);
+            
+            // Calcular lucro e percentual
+            const profit = futureValue - totalInvested;
+            const returnPercent = ((futureValue / totalInvested - 1) * 100).toFixed(2);
+            
+            // Atualizar a interface
+            document.getElementById('total-invested').textContent = formatCurrency(totalInvested);
+            document.getElementById('final-value').textContent = formatCurrency(futureValue);
+            document.getElementById('profit-loss').textContent = formatCurrency(profit);
+            document.getElementById('return-percent').textContent = `${returnPercent}%`;
+            
+            // Colorir o resultado de lucro/prejuízo
+            const profitElement = document.getElementById('profit-loss');
+            if (profit >= 0) {
+                profitElement.style.color = '#26a269';
+            } else {
+                profitElement.style.color = '#c01c28';
+            }
+            
+            // Mostrar os resultados
+            document.getElementById('results').style.display = 'block';
+            
+            // Rolar até os resultados
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+        
+        // Formatar valores monetários
+        function formatCurrency(value) {
+            return 'R$ ' + value.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        }
+        
+        // Navegação suave
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                document.querySelector(targetId).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Inicializar a simulação com valores padrão
+        document.getElementById('simulate-btn').click();
+        
+        // Efeito de digitação no título do herói (opcional)
+        const heroTitle = document.querySelector('.hero h1');
+        const originalText = heroTitle.innerHTML;
+        
+        // Efeito de entrada
+        heroTitle.style.opacity = '0';
+        setTimeout(() => {
+            heroTitle.style.transition = 'opacity 1s';
+            heroTitle.style.opacity = '1';
+        }, 300);
+    </script>
+</body>
+</html>
